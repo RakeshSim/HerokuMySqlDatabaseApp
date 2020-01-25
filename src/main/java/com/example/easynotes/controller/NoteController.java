@@ -34,8 +34,11 @@ public class NoteController {
 	
 	// Create a new Note
 	@PostMapping("/notes")
-	public Note createNote(@Valid @RequestBody Note note) {
-	    return noteRepository.save(note);
+	public ResponseEntity<?> createNote(@Valid @RequestBody List<Note> note) {
+		for(Note n:note) {
+	     noteRepository.save(n);
+		}
+		return ResponseEntity.ok().build();
 	}
 	
 	// Get a Single Note
